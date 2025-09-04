@@ -26,3 +26,5 @@ DELETE FROM customers WHERE email IS NULL;
 
 
 -- \copy products TO 'products_export.csv' CSV HEADER;
+
+--\copy (SELECT name, price, stock_quantity FROM products WHERE is_active = TRUE) TO 'active_products.csv' CSV HEADER;
