@@ -51,3 +51,7 @@ UPDATE products SET price = price * 1.1 WHERE category_id = 1;
 UPDATE customers 
 SET city = 'Москва' 
 WHERE city IS NULL AND phone LIKE '+7-495%';
+
+UPDATE products 
+SET is_active = FALSE
+WHERE category_id = (SELECT id FROM categories WHERE name = 'Книги');
