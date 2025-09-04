@@ -23,5 +23,7 @@ SELECT
 FROM employees e
 NATURAL JOIN  projects p 
 NATURAL JOIN  departments d
-GROUP by d.department_name, p.project_name;
+GROUP by d.department_name, p.project_name
+HAVING SUM(p.budget) > 500000;
+
 
