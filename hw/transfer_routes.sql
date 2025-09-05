@@ -83,12 +83,17 @@ INSERT INTO routes (from_city_id, to_city_id, distance_km, duration_minutes, pri
 (3, 5, 1057, 660, 3200.00), -- Казань - Екатеринбург
 (1, 7, 1160, 780, 3800.00), -- Москва - Краснодар
 (4, 9, 430, 320, 2000.00), -- Н.Новгород - Самара
-(7, 10, 270, 180, 1200.00); -- Краснодар - Ростов
+(7, 10, 270, 180, 1200.00), -- Краснодар - Ростов
+(2, 1, 635, 480, 2500.00), -- СПб - Москва
+(5, 3, 1057, 660, 3200.00); -- Екатеринбург - Казань
 
 -- Вставка данных: трансферы
 INSERT INTO transfers (route_id, vehicle_id, departure_time, available_seats) VALUES
-(1, 2, '2024-01-15 08:00:00', 18),
-(2, 1, '2024-01-15 10:30:00', 6),
-(3, 3, '2024-01-15 14:00:00', 3),
-(4, 4, '2024-01-16 09:00:00', 25),
-(5, 2, '2024-01-16 11:00:00', 15);
+(1, 2, CURRENT_DATE + INTERVAL '1 day' + TIME '08:00:00', 18),
+(2, 1, CURRENT_DATE + INTERVAL '2 days' + TIME '10:30:00', 6),
+(3, 3, CURRENT_DATE + INTERVAL '3 days' + TIME '14:00:00', 3),
+(4, 4, CURRENT_DATE + INTERVAL '1 day' + TIME '09:00:00', 25),
+(5, 2, CURRENT_DATE + INTERVAL '2 days' + TIME '11:00:00', 15),
+(6, 3, CURRENT_DATE + INTERVAL '3 days' + TIME '16:30:00', 2),
+(7, 1, CURRENT_DATE + INTERVAL '1 day' + TIME '12:15:00', 4),
+(8, 4, CURRENT_DATE + INTERVAL '2 days' + TIME '07:45:00', 28);
