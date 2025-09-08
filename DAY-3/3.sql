@@ -28,5 +28,27 @@ window w as (PARTITION by seller ORDER BY sale_date)
 ORDER BY seller, sale_date;
 
 
+SELECT 
+    seller,
+    sale_date,
+    amount, 
+    FIRST_VALUE(amount) OVER w AS base    
+from sales
+window w as (PARTITION by seller ORDER BY sale_date);
 
 
+
+
+SELECT 
+    seller,
+    sale_date,
+    amount, 
+    FIRST_VALUE(amount) OVER w AS base,
+    amount - FIRST_VALUE(amount) OVER (PARTITION BY seller ORDER BY sale_date) AS growth,
+    (amount / FIRST_VALUE(amount) OVER (PARTITION BY seller ORDER BY sale_date) - 1) * 100 AS growth_percent, 
+    ROUND(
+        (amount::NUMERIC / FIRST_VALUE(amount) OVER (PARTITION BY seller ORDER BY sale_date) - 1) * 100, 
+        2
+    ) AS growth_percent    
+from sales
+window w as (PARTITION by seller ORDER BY sale_date);
