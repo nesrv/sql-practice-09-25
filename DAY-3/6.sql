@@ -39,5 +39,12 @@ SELECT
 FROM sales_2;
 
 
-INSERT INTO sales_2 (seller, sale_date, amount, product_category) VALUES
-('Олег', '2024-01-12', 200, 'Одежда');
+SELECT
+    seller,
+    sale_date,
+    amount,
+    RANK() OVER (ORDER BY amount DESC) AS global_rank
+FROM sales;
+
+
+
