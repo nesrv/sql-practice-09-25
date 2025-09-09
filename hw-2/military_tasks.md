@@ -36,9 +36,7 @@
 
 4. **Создать функцию, возвращающую таблицу изделий по категории**
 
-![
-   
-](image.png)
+![alt text](image/image.png)
 
    ```sql
    -- Создать функцию get_products_by_category(category_name VARCHAR) 
