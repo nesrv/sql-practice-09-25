@@ -19,3 +19,7 @@ INSERT INTO products (name, info, metadata) VALUES
  '{"brand": "Аквариус", "price": 85000, "specs": {"ram": "8GB", "cpu": "Байкал"}}',
  '{"category": "laptop", "tags": ["российский", "офисный"], "available": true}'
 );
+
+TABLE products;
+
+SELECT name, info->'brand' AS brand_json FROM products;
