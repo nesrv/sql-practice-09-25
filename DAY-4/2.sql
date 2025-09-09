@@ -2,7 +2,6 @@
 
 
 WITH RECURSIVE paths AS (
-
     SELECT
          r.to_city_id,
          r.distance_km,
@@ -23,6 +22,7 @@ UNION ALL
     WHERE p.route NOT LIKE '%' || c.name || '%'
 )
 
-SELECT * from paths p
+SELECT
+   p.distance_km, (p.route || ' -> ' || c.name)::TEXT AS full_path from paths p
 JOIN cities c ON p.to_city_id = c.id
-WHERE c.name = 'Екатеринбург';
+WHERE c.name = 'Казань';
