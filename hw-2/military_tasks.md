@@ -9,7 +9,9 @@
    ```sql
    -- Создать функцию calculate_volume(dimension) RETURNS NUMERIC
    -- Ваш код здесь
-   -- SELECT * FROM calculate_volume(ROW(1000, 500, 200));
+  
+  
+  SELECT * FROM calculate_volume(ROW(1000, 500, 200));
    ```
 
 2. **Создать функцию для определения возраста производителя**
@@ -19,7 +21,9 @@
    ```sql
    -- Создать функцию get_manufacturer_age(manufacturer_id INTEGER) RETURNS INTEGER
    -- Ваш код здесь
-   -- SELECT * FROM get_manufacturer_age(1)
+   
+   
+   SELECT * FROM get_manufacturer_age(1)
    ```
 
 3. **Создать функцию для подсчета количества испытаний по типу**
@@ -29,7 +33,9 @@
    ```sql
    -- Создать функцию count_tests_by_type(test_type_param VARCHAR) RETURNS INTEGER
    -- Ваш код здесь
-   -- SELECT * FROM count_tests_by_type('Летные испытания');
+   
+   
+   SELECT * FROM count_tests_by_type('Летные испытания');
    ```
 
 ## SQL-функции с RETURNS TABLE (4-6)
@@ -42,7 +48,9 @@
    -- Создать функцию get_products_by_category(category_name VARCHAR) 
    -- RETURNS TABLE(product_name VARCHAR, model VARCHAR, weight_kg NUMERIC)
    -- Ваш код здесь
-   -- SELECT * FROM get_products_by_category('Стрелковое оружие');
+   
+   
+   SELECT * FROM get_products_by_category('Стрелковое оружие');
    ```
 
 5. **Создать функцию для получения статистики испытаний по изделию**
@@ -55,43 +63,92 @@
    -- Создать функцию get_product_test_stats(product_id INTEGER)
    -- RETURNS TABLE(total_tests INTEGER, passed_tests INTEGER, success_rate NUMERIC)
    -- Ваш код здесь
-   --SELECT * FROM get_product_test_stats(1);
+
+   SELECT * FROM get_product_test_stats(1);
    ```
 
 6. **Создать функцию для поиска изделий в диапазоне веса**
+
+![alt text](image.png)
+
+
    ```sql
-   -- Создать функцию get_products_by_weight_range(min_weight NUMERIC, max_weight NUMERIC)
-   -- RETURNS TABLE(name VARCHAR, weight_kg NUMERIC, category_name VARCHAR)
+   -- Создать функцию 
+   CREATE OR REPLACE FUNCTION get_products_by_weight_range(
+    IN min_weight NUMERIC,
+    IN max_weight NUMERIC
+)
+RETURNS TABLE(name VARCHAR, weight_kg NUMERIC, category_name VARCHAR) AS $$
    -- Ваш код здесь
+
+   SELECT * FROM get_products_by_weight_range(1, 1e5);
    ```
 
 ## SQL-процедуры (7-9)
 
-7. **Создать процедуру для добавления нового испытания**
+7. **Создать процедуру и функцию для добавления нового испытания**
+
+![1757449927286](image/military_tasks/1757449927286.png)
+
+![alt text](image-1.png)
+
    ```sql
-   -- Создать процедуру add_test(product_id INTEGER, test_type VARCHAR, test_date DATE)
-   -- Ваш код здесь
+-- функция
+CREATE OR REPLACE FUNCTION add_test(
+    IN product_id INTEGER,
+    IN test_type VARCHAR,
+    IN test_date DATE
+)
+RETURNS TABLE ...
+
+-- процедура
+CREATE OR REPLACE PROCEDURE proc_add_test(
+    IN product_id INTEGER,
+    IN test_type VARCHAR,
+    IN test_date DATE,
+    OUT test_id INTEGER,
+    OUT message TEXT
+)
+  
+
+
+   CALL add_test(3, 'Новое испытание-3', '2024-01-01');
+   SELECT * FROM proc_add_test(3, 'Новое испытание-3.1', '2024-01-01');
    ```
 
 8. **Создать процедуру для обновления статуса изделия**
    ```sql
-   -- Создать процедуру update_product_status(product_id INTEGER, new_status VARCHAR)
+   -- Создать процедуру 
+   -- CREATE OR REPLACE PROCEDURE update_product_status
+  
    -- Ваш код здесь
    ```
 
 9. **Создать процедуру для архивации старых испытаний**
+
+![alt text](image-2.png)
+
+
    ```sql
    -- Создать процедуру archive_old_tests(cutoff_date DATE)
    -- Ваш код здесь
+   CALL archive_old_tests('2024-01-01');
    ```
 
 ## Рекурсивные SQL-функции (10)
 
-10. **Создать рекурсивную функцию для генерации последовательности годов производства**
+
+10. **Создать рекурсивную функцию для разворачивания массива годов производства**
+
+![alt text](image-3.png)
+
     ```sql
-    -- Создать функцию generate_production_sequence(start_year INTEGER, end_year INTEGER)
-    -- RETURNS TABLE(year INTEGER) с использованием рекурсивного CTE
+    -- Создать функцию get_all_production_years(product_id INTEGER)
+    -- RETURNS TABLE(year INTEGER, product_name VARCHAR)
+    -- Функция должна рекурсивно разворачивать массив production_years
+    -- из таблицы military_products в отдельные строки
     -- Ваш код здесь
+    -- SELECT * FROM get_all_production_years(1); -- все годы производства АК-74М
     ```
 
 ## Работа с JSON и JSONB (11-12)
