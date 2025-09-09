@@ -42,7 +42,7 @@
 
 4. **Создать функцию, возвращающую таблицу изделий по категории**
 
-![alt text](image/image.png)
+![1757452081114](image/military_tasks/1757452081114.png)
 
    ```sql
    -- Создать функцию get_products_by_category(category_name VARCHAR) 
@@ -69,7 +69,7 @@
 
 6. **Создать функцию для поиска изделий в диапазоне веса**
 
-![alt text](image.png)
+![1757452145531](image/military_tasks/1757452145531.png)
 
 
    ```sql
@@ -81,7 +81,7 @@
 RETURNS TABLE(name VARCHAR, weight_kg NUMERIC, category_name VARCHAR) AS $$
    -- Ваш код здесь
 
-   SELECT * FROM get_products_by_weight_range(1, 1e5);
+   SELECT * FROM get_products_by_weight_range(1, 10);
    ```
 
 ## SQL-процедуры (7-9)
@@ -90,7 +90,7 @@ RETURNS TABLE(name VARCHAR, weight_kg NUMERIC, category_name VARCHAR) AS $$
 
 ![1757449927286](image/military_tasks/1757449927286.png)
 
-![alt text](image-1.png)
+![alt text](image/image-1.png)
 
    ```sql
 -- функция
@@ -117,16 +117,20 @@ CREATE OR REPLACE PROCEDURE proc_add_test(
    ```
 
 8. **Создать процедуру для обновления статуса изделия**
+
+
    ```sql
    -- Создать процедуру 
-   -- CREATE OR REPLACE PROCEDURE update_product_status
+   CREATE OR REPLACE PROCEDURE update_product_status(
+    IN product_id INTEGER,
+    IN new_status VARCHAR)
   
-   -- Ваш код здесь
+   CALL update_product_status(1, 'inactive');
    ```
 
 9. **Создать процедуру для архивации старых испытаний**
 
-![alt text](image-2.png)
+![alt text](image/image-2.png)
 
 
    ```sql
@@ -135,57 +139,72 @@ CREATE OR REPLACE PROCEDURE proc_add_test(
    CALL archive_old_tests('2024-01-01');
    ```
 
-## Рекурсивные SQL-функции (10)
-
-
-10. **Создать рекурсивную функцию для разворачивания массива годов производства**
-
-![alt text](image-3.png)
-
-    ```sql
-    -- Создать функцию get_all_production_years(product_id INTEGER)
-    -- RETURNS TABLE(year INTEGER, product_name VARCHAR)
-    -- Функция должна рекурсивно разворачивать массив production_years
-    -- из таблицы military_products в отдельные строки
-    -- Ваш код здесь
-    -- SELECT * FROM get_all_production_years(1); -- все годы производства АК-74М
-    ```
 
 ## Работа с JSON и JSONB (11-12)
 
-11. **Найти все изделия с определенным калибром в характеристиках**
-    ```sql
-    -- Запрос для поиска изделий с калибром "5.45x39" в JSON поле characteristics
+10. **Найти все изделия с определенным калибром в характеристиках**
+
+![1757451532210](image/military_tasks/1757451532210.png)
+
+
+```sql
+-- Запрос для поиска изделий с калибром "5.45x39" в JSON поле characteristics
+
+-- Ваш код здесь
+```
+
+11. **Найти все изделия с калибром больше 6 в характеристиках**
+
+![alt text](image/image-4.png)
+
+ ```sql
+    -- Запрос для поиска изделий с калибром более 6 в характеристиках 
     -- Ваш код здесь
-    ```
+```
 
 12. **Обновить техническую характеристику в JSONB поле**
-    ```sql
-    -- Запрос для добавления нового поля "maintenance_hours" со значением 100 
-    -- в technical_specs для всех изделий категории "Стрелковое оружие"
-    -- Ваш код здесь
-    ```
+
+
+![1757451664132](image/military_tasks/1757451664132.png)
+
+```sql
+-- Запрос для добавления нового поля "maintenance_hours" со значением 100 
+-- в technical_specs для всех изделий категории "Стрелковое оружие"
+-- Ваш код здесь
+
+select technical_specs from military_products;
+```
 
 ## Window функции (13)
 
 13. **Ранжировать изделия по весу внутри каждой категории**
-    ```sql
-    -- Использовать ROW_NUMBER(), RANK(), DENSE_RANK() для ранжирования по весу
-    -- Ваш код здесь
-    ```
+
+![1757451987980](image/military_tasks/1757451987980.png)
+
+```sql
+-- Использовать ROW_NUMBER(), RANK(), DENSE_RANK() для ранжирования по весу
+-- Ваш код здесь
+```
 
 ## GROUPING SETS, CUBE и ROLLUP (14-15)
 
 14. **Создать отчет по количеству изделий с использованием ROLLUP**
-    ```sql
-    -- Использовать ROLLUP для группировки по стране производителя и категории
-    -- Показать количество изделий на каждом уровне агрегации
-    -- Ваш код здесь
-    ```
+
+![alt text](image/image-5.png)
+
+```sql
+-- Использовать ROLLUP для группировки по стране производителя и категории
+-- Показать количество изделий на каждом уровне агрегации
+-- Ваш код здесь
+```
 
 15. **Создать сводный отчет по испытаниям с использованием CUBE**
-    ```sql
-    -- Использовать CUBE для анализа испытаний по типу теста и результату (passed)
-    -- Показать количество испытаний для всех комбинаций
-    -- Ваш код здесь
-    ```
+
+![alt text](image/image-6.png)
+
+
+```sql
+-- Использовать CUBE для анализа испытаний по типу теста и результату (passed)
+-- Показать количество испытаний для всех комбинаций
+-- Ваш код здесь
+```
