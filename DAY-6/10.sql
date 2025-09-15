@@ -1,7 +1,3 @@
-rollback;
-
-CREATE TABLE t(id integer, code text);
-INSERT INTO t VALUES (1, 'Раз'), (2, 'Два');
 
 
 DO $$
