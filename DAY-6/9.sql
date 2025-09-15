@@ -1,0 +1,15 @@
+CREATE TABLE test(n integer);
+
+CREATE or REPLACE PROCEDURE foo()
+AS $$
+BEGIN
+    INSERT INTO test VALUES (1);
+	COMMIT;
+	INSERT INTO test VALUES (2);
+	ROLLBACK;
+END
+$$ LANGUAGE plpgsql;
+
+
+BEGIN;
+CALL foo();
