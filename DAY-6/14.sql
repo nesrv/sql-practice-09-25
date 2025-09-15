@@ -1,0 +1,22 @@
+CREATE FUNCTION t() RETURNS TABLE(LIKE t) 
+AS $$
+BEGIN
+	 RETURN QUERY SELECT id, code FROM t ORDER BY id;
+END
+$$ LANGUAGE plpgsql;
+
+
+SELECT * FROM t();
+
+
+CREATE or REPLACE FUNCTION days_of_week() RETURNS SETOF text 
+AS $$
+BEGIN
+	 FOR i IN 7 .. 13 LOOP
+	 	RETURN NEXT to_char(to_date(i::text,'J'),'TMDy');
+	 END LOOP;
+END
+$$ LANGUAGE plpgsql IMMUTABLE;
+
+
+SELECT * FROM days_of_week() WITH ORDINALITY;
