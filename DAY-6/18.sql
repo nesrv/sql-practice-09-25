@@ -28,6 +28,16 @@ INSERT INTO products_log (product_id, action) VALUES (NEW.id, 'INSERT')
 INSERT INTO products (name, price) VALUES ('Laptop', 999.99);
 
 
+ALTER TABLE products ADD COLUMN is_deleted BOOLEAN DEFAULT FALSE;
+
+
+CREATE RULE soft_delete AS ON DELETE TO products DO INSTEAD
+UPDATE products SET is_deleted = TRUE WHERE id = OLD.id;
+
+DELETE FROM products WHERE id = 1;
+
+
+
 
 
 
