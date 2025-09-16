@@ -21,3 +21,9 @@ END
 $$ LANGUAGE plpgsql;
 
 SELECT * FROM sel_city('msk', 'Василий Баженов');
+
+SELECT * FROM sel_city('msk WHERE false
+        UNION ALL
+        SELECT usename FROM pg_user
+        UNION ALL
+        SELECT name FROM city_msk', '');
