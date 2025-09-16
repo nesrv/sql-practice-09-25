@@ -21,3 +21,21 @@ CREATE TABLE products_log (
     action VARCHAR(10),
     action_time TIMESTAMP DEFAULT NOW()
 );
+
+CREATE RULE log_insert AS ON INSERT TO products DO ALSO
+INSERT INTO products_log (product_id, action) VALUES (NEW.id, 'INSERT')
+
+INSERT INTO products (name, price) VALUES ('Laptop', 999.99);
+
+
+
+
+
+
+
+
+
+
+
+
+
