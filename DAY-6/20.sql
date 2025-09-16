@@ -16,3 +16,15 @@ BEGIN
 	RETURN rec;
 END
 $$ LANGUAGE plpgsql;
+
+CREATE TABLE t(
+    id integer PRIMARY KEY,
+    s text
+);
+
+CREATE TRIGGER t_before_stmt
+BEFORE INSERT OR UPDATE OR DELETE
+ON t   
+FOR EACH STATEMENT
+EXECUTE FUNCTION describe(); 
+
